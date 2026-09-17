@@ -85,10 +85,30 @@ body {
   line-height: 1.05;
   color: var(--text-hi);
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  min-height: 1.15em;
 }
 
-.hero h1 span {
+.hero h1 .last-name {
   color: var(--amber);
+}
+
+.hero h1 span,
+.hero .tag {
+  display: inline-block;
+  user-select: none;
+}
+
+/* Scramble glitch characters */
+.dud {
+  color: var(--cyan);
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(89, 217, 200, 0.6));
 }
 
 .hero p.intro {
