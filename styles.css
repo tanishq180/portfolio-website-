@@ -1,0 +1,491 @@
+/* =========================================================
+   1. DESIGN TOKENS & RESET
+========================================================= */
+:root {
+  --bg-deep:      #0b0f14;   /* page base, behind the bg image */
+  --panel:        #11161d;   /* content-container surfaces */
+  --panel-raised: #161c25;   /* cards inside panels */
+  --line:         #232b36;   /* hairline borders */
+  --text-hi:      #eef1f5;
+  --text-lo:      #9aa5b1;
+  --amber:        #ffb454;   /* primary accent */
+  --cyan:         #59d9c8;   /* secondary accent */
+  --font-head:    'Space Mono', monospace;
+  --font-body:    'Inter', sans-serif;
+  --tab-h:        84px;      /* height of the minimized tab row */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-hi);
+  background: var(--bg-deep);
+  overflow: hidden; /* the page itself never scrolls — only open panels do */
+}
+
+/* =========================================================
+   2. FIXED FULL-SCREEN BACKGROUND
+   Uses backgroundjpg.jpg with dark overlay and subtle radial glows
+========================================================= */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(to bottom, rgba(11, 15, 20, 0.72) 0%, rgba(11, 15, 20, 0.85) 100%),
+    radial-gradient(circle at 20% 25%, rgba(255, 180, 84, 0.12), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(89, 217, 200, 0.12), transparent 50%),
+    url('backgroundjpg.jpg');
+  background-size: cover, auto, auto, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   3. HERO — dead center on load
+========================================================= */
+.hero {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px calc(var(--tab-h) + 24px);
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.hero .tag {
+  font-family: var(--font-head);
+  color: var(--cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--text-hi);
+}
+
+.hero h1 span {
+  color: var(--amber);
+}
+
+.hero p.intro {
+  margin-top: 20px;
+  max-width: 560px;
+  color: var(--text-lo);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Hero Social Links - Rounded Square Boxes */
+.hero-socials {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.social-box,
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(22, 28, 37, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text-lo);
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.social-box i,
+.social-link i {
+  color: var(--cyan);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.social-box:hover,
+.social-link:hover {
+  background: var(--panel-raised);
+  border-color: var(--amber);
+  color: var(--text-hi);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), 0 0 14px rgba(255, 180, 84, 0.25);
+}
+
+.social-box:hover i,
+.social-link:hover i {
+  color: var(--amber);
+  transform: scale(1.18);
+}
+
+.social-box:focus-visible,
+.social-link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* dims + blurs the hero slightly while a panel is open, so focus shifts down */
+body.panel-open .hero {
+  filter: blur(2px) brightness(0.5);
+}
+
+/* =========================================================
+   4. BOTTOM TAB ROW (always visible, 4 cards)
+========================================================= */
+.tabs {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  height: var(--tab-h);
+  display: flex;
+  border-top: 1px solid var(--line);
+  background: rgba(17, 22, 29, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.tab {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  border-right: 1px solid var(--line);
+  color: var(--text-lo);
+  transition: background 0.25s ease, color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab:hover {
+  background: var(--panel-raised);
+  color: var(--text-hi);
+}
+
+.tab .num {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  color: var(--amber);
+}
+
+.tab .label {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+}
+
+.tab.active {
+  background: var(--panel-raised);
+  color: var(--text-hi);
+}
+
+.tab.active .label {
+  color: var(--amber);
+}
+
+/* =========================================================
+   5. EXPANDING PANELS
+   Each panel sits fixed above the tab row, height animates
+   from 0 to 78vh. Only the .active one is interactive/visible.
+========================================================= */
+.panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--tab-h);
+  z-index: 2;
+  height: 0;
+  overflow: hidden;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  transition: height 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.panel.active {
+  height: 78vh;
+  overflow-y: auto;
+}
+
+.panel-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 56px 28px 48px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.35s ease 0.12s, transform 0.35s ease 0.12s;
+}
+
+.panel.active .panel-inner {
+  opacity: 1;
+  transform: none;
+}
+
+.panel-inner h2 {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.panel-inner .kicker {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: var(--cyan);
+  margin-bottom: 20px;
+}
+
+/* ---- Intro panel ---- */
+.about-text {
+  color: var(--text-lo);
+  line-height: 1.75;
+  font-size: 1.02rem;
+  max-width: 70ch;
+}
+
+.about-text strong {
+  color: var(--text-hi);
+}
+
+/* ---- Skills panel ---- */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.skill {
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.skill:hover {
+  border-color: var(--amber);
+  transform: translateY(-3px);
+}
+
+.skill i {
+  font-size: 1.8rem;
+  color: var(--cyan);
+}
+
+.skill span {
+  font-size: 0.8rem;
+  color: var(--text-lo);
+}
+
+/* ---- Projects panel ---- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.project-card {
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-thumb {
+  height: 130px;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 180, 84, 0.12) 0 10px, transparent 10px 20px),
+    var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  color: var(--text-lo);
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-body {
+  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.project-body h3 {
+  font-family: var(--font-head);
+  font-size: 1.02rem;
+}
+
+.project-body p {
+  color: var(--text-lo);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  color: var(--text-hi);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+.btn.primary {
+  background: var(--amber);
+  color: #191308;
+  border-color: var(--amber);
+}
+
+.btn.primary:hover {
+  opacity: 0.88;
+  color: #191308;
+}
+
+/* ---- Contact panel ---- */
+form.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+  margin-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--text-lo);
+}
+
+.field input,
+.field textarea {
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 11px 12px;
+  color: var(--text-hi);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+.contact-form button {
+  align-self: flex-start;
+  background: var(--cyan);
+  color: #0b1a17;
+  border: none;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  transition: opacity 0.2s ease;
+}
+
+.contact-form button:hover {
+  opacity: 0.85;
+}
+
+.form-note {
+  font-size: 0.78rem;
+  color: var(--text-lo);
+  margin-top: -4px;
+}
+
+/* accessibility: visible focus ring on tabs */
+.tab:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -3px;
+}
+
+.btn:focus-visible,
+.contact-form button:focus-visible {
+  outline: 2px solid var(--cyan);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panel-inner,
+  .hero {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .tab .label {
+    font-size: 0.8rem;
+  }
+  .panel.active {
+    height: 82vh;
+  }
+  .panel-inner {
+    padding: 40px 18px 36px;
+  }
+}

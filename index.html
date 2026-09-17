@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arjun Rao — Developer Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Separated Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Full-Screen Fixed Background Container -->
+  <div class="bg" aria-hidden="true"></div>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="tag">// full-stack developer</div>
+    <h1>Arjun <span>Rao</span></h1>
+    <p class="intro">
+      I build fast, reliable web applications — from React interfaces down to
+      the APIs and databases underneath. Currently focused on developer tools
+      and real-time systems.
+    </p>
+
+    <!-- Social Links in Rounded Square Boxes -->
+    <div class="hero-socials">
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-box" aria-label="GitHub" title="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-box" aria-label="LinkedIn" title="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-box" aria-label="Twitter / X" title="Twitter / X">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="mailto:arjun.dev@example.com" class="social-box" aria-label="Email" title="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= PANELS ================= -->
+  <!-- 01 / Intro Panel -->
+  <section class="panel" id="panel-intro">
+    <div class="panel-inner">
+      <div class="kicker">01 / about</div>
+      <h2>Intro</h2>
+      <p class="about-text">
+        <strong>I'm Arjun</strong>, a full-stack developer based in Chennai with about
+        six years of experience shipping production software — mostly in React,
+        Node, and Python. I like working close to the problem: I've spent time
+        building internal tooling, public-facing products, and the occasional
+        3am incident fix.<br><br>
+        Outside of client work, I maintain a couple of small open-source
+        libraries and spend a lot of time reading about distributed systems.
+        I care about code that's easy for the next person to read — including
+        future me.
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 / Skills Panel -->
+  <section class="panel" id="panel-skills">
+    <div class="panel-inner">
+      <div class="kicker">02 / stack</div>
+      <h2>Skills</h2>
+      <div class="skill-grid">
+        <div class="skill"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+        <div class="skill"><i class="fa-brands fa-python"></i><span>Python</span></div>
+        <div class="skill"><i class="fa-brands fa-react"></i><span>React</span></div>
+        <div class="skill"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+        <div class="skill"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+        <div class="skill"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+        <div class="skill"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+        <div class="skill"><i class="fa-brands fa-docker"></i><span>Docker</span></div>
+        <div class="skill"><i class="fa-brands fa-aws"></i><span>AWS</span></div>
+        <div class="skill"><i class="fa-solid fa-database"></i><span>PostgreSQL</span></div>
+        <div class="skill"><i class="fa-brands fa-golang"></i><span>Go</span></div>
+        <div class="skill"><i class="fa-brands fa-linux"></i><span>Linux</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / Projects Panel -->
+  <section class="panel" id="panel-projects">
+    <div class="panel-inner">
+      <div class="kicker">03 / work</div>
+      <h2>Projects</h2>
+      <div class="project-grid">
+
+        <div class="project-card">
+          <div class="project-thumb">preview — flowstate</div>
+          <div class="project-body">
+            <h3>Flowstate</h3>
+            <p>A lightweight kanban board with real-time sync across
+               devices, built on React and WebSockets.</p>
+            <div class="project-links">
+              <a class="btn primary" href="#">Live Demo</a>
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb">preview — ledgerly</div>
+          <div class="project-body">
+            <h3>Ledgerly</h3>
+            <p>Self-hosted expense tracker with a Python/FastAPI backend
+               and a Postgres-backed reporting engine.</p>
+            <div class="project-links">
+              <a class="btn primary" href="#">Live Demo</a>
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb">preview — pingback</div>
+          <div class="project-body">
+            <h3>Pingback</h3>
+            <p>An uptime monitor with configurable alert rules, deployed
+               on a small Go service and a Next.js dashboard.</p>
+            <div class="project-links">
+              <a class="btn primary" href="#">Live Demo</a>
+              <a class="btn" href="#">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 / Contact Panel -->
+  <section class="panel" id="panel-contact">
+    <div class="panel-inner">
+      <div class="kicker">04 / reach out</div>
+      <h2>Contact</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" rows="5" placeholder="What are you building?" required></textarea>
+        </div>
+        <button type="submit">Send message</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= TAB BAR (BOTTOM DOCK) ================= -->
+  <nav class="tabs" id="tabs">
+    <div class="tab" data-target="panel-intro" tabindex="0" role="button" aria-expanded="false">
+      <span class="num">01</span><span class="label">Intro</span>
+    </div>
+    <div class="tab" data-target="panel-skills" tabindex="0" role="button" aria-expanded="false">
+      <span class="num">02</span><span class="label">Skills</span>
+    </div>
+    <div class="tab" data-target="panel-projects" tabindex="0" role="button" aria-expanded="false">
+      <span class="num">03</span><span class="label">Projects</span>
+    </div>
+    <div class="tab" data-target="panel-contact" tabindex="0" role="button" aria-expanded="false">
+      <span class="num">04</span><span class="label">Contact</span>
+    </div>
+  </nav>
+
+  <!-- Separated Logic Script -->
+  <script src="script.js"></script>
+</body>
+</html>
