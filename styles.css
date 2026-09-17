@@ -2,18 +2,26 @@
    1. DESIGN TOKENS & RESET
 ========================================================= */
 :root {
-  --bg-deep:      #0b0f14;   /* page base, behind the bg image */
-  --panel:        #11161d;   /* content-container surfaces */
-  --panel-raised: #161c25;   /* cards inside panels */
-  --line:         #232b36;   /* hairline borders */
-  --text-hi:      #eef1f5;
-  --text-lo:      #9aa5b1;
-  --amber:        #ffb454;   /* primary accent */
-  --cyan:         #59d9c8;   /* secondary accent */
-  --font-brand:   'Righteous', cursive, sans-serif; /* hero name font */
-  --font-head:    'Space Mono', monospace;
-  --font-body:    'Inter', sans-serif;
-  --tab-h:        84px;      /* height of the minimized tab row */
+  --bg-deep: #0b0f14;
+  /* page base, behind the bg image */
+  --panel: #11161d;
+  /* content-container surfaces */
+  --panel-raised: #161c25;
+  /* cards inside panels */
+  --line: #232b36;
+  /* hairline borders */
+  --text-hi: #eef1f5;
+  --text-lo: #9aa5b1;
+  --amber: #ffb454;
+  /* primary accent */
+  --cyan: #59d9c8;
+  /* secondary accent */
+  --font-brand: 'Righteous', cursive, sans-serif;
+  /* hero name font */
+  --font-head: 'Space Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+  --tab-h: 84px;
+  /* height of the minimized tab row */
 }
 
 * {
@@ -22,7 +30,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -30,7 +39,8 @@ body {
   font-family: var(--font-body);
   color: var(--text-hi);
   background: var(--bg-deep);
-  overflow: hidden; /* the page itself never scrolls — only open panels do */
+  overflow: hidden;
+  /* the page itself never scrolls — only open panels do */
 }
 
 /* =========================================================
@@ -85,30 +95,10 @@ body {
   line-height: 1.05;
   color: var(--text-hi);
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-  cursor: default;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35em;
-  min-height: 1.15em;
 }
 
-.hero h1 .last-name {
+.hero h1 span {
   color: var(--amber);
-}
-
-.hero h1 span,
-.hero .tag {
-  display: inline-block;
-  user-select: none;
-}
-
-/* Scramble glitch characters */
-.dud {
-  color: var(--cyan);
-  opacity: 0.85;
-  filter: drop-shadow(0 0 6px rgba(89, 217, 200, 0.6));
 }
 
 .hero p.intro {
@@ -494,6 +484,7 @@ form.contact-form {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .panel,
   .panel-inner,
   .hero {
@@ -505,9 +496,11 @@ form.contact-form {
   .tab .label {
     font-size: 0.8rem;
   }
+
   .panel.active {
     height: 82vh;
   }
+
   .panel-inner {
     padding: 40px 18px 36px;
   }
